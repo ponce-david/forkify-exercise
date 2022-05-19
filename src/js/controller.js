@@ -19,14 +19,16 @@ import { async } from 'regenerator-runtime/runtime';
 const controlRecipes = async function () {
   try {
     const id = window.location.hash.slice(1);
+    console.log(id);
 
     if (!id) return;
+    recipeView.renderSpinner();
 
     //0. Update results view to mark selected search result
     resultsView.update(model.getSearchResultsPage());
+
     bookmarksView.update(model.state.bookMarks);
 
-    recipeView.renderSpinner();
     //1. Loading recipe
     await model.loadRecipe(id);
 
@@ -34,6 +36,7 @@ const controlRecipes = async function () {
     recipeView.render(model.state.recipe);
   } catch (err) {
     recipeView.renderError();
+    console.error(err);
   }
 };
 
@@ -92,7 +95,7 @@ const controlAddRecipe = async function (newRecipe) {
     addRecipeView.renderSpinner();
     //Upload the new recipe
     await model.uploadRecipe(newRecipe);
-    console.log(model.state.recipe);
+    // console.log(model.state.recipe);
 
     //render recipe
     recipeView.render(model.state.recipe);

@@ -1,12 +1,11 @@
 import icons from 'url:../../img/icons.svg';
-// import { Fraction } from 'fractional';
-import { fracty } from 'fracty';
-// const fracty = require('fracty');
+// import fracty from 'Fracty';
 import view from './view';
+import { Fraction } from 'fractional';
 
 class RecipeView extends view {
   _parentEl = document.querySelector('.recipe');
-  _errorMessage = `We could not find that recipe. Please try another`;
+  _errorMessage = `We could not find that recipe. Please try another one`;
   _message = '';
 
   addHandlerRender(handler) {
@@ -17,9 +16,7 @@ class RecipeView extends view {
     this._parentEl.addEventListener('click', function (e) {
       const btn = e.target.closest('.btn--update-servings');
       if (!btn) return;
-
       const updateTo = +btn.dataset.updateTo;
-
       if (updateTo > 0) handler(updateTo);
     });
   }
@@ -133,7 +130,7 @@ class RecipeView extends view {
         <use href="${icons}#icon-check"></use>
       </svg>
       <div class="recipe__quantity">${
-        ing.quantity ? new fracty(ing.quantity).toString() : ''
+        ing.quantity ? new Fraction(ing.quantity).toString() : ''
       }</div>
       <div class="recipe__description">
         <span class="recipe__unit">${ing.unit}</span>
