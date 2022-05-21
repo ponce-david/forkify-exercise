@@ -1,7 +1,9 @@
+// declare module 'fractional';
 import icons from 'url:../../img/icons.svg';
-// import fracty from 'Fracty';
+// import  from 'Fracty';
 import view from './view';
-import { Fraction } from 'fractional';
+// import { Fraction } from 'fractional';
+import fraction from 'mathjs';
 
 class RecipeView extends view {
   _parentEl = document.querySelector('.recipe');
@@ -130,7 +132,7 @@ class RecipeView extends view {
         <use href="${icons}#icon-check"></use>
       </svg>
       <div class="recipe__quantity">${
-        ing.quantity ? new Fraction(ing.quantity).toString() : ''
+        ing.quantity ? ing.quantity.toString() : ''
       }</div>
       <div class="recipe__description">
         <span class="recipe__unit">${ing.unit}</span>
